@@ -3,13 +3,14 @@
 pragma solidity >=0.7.0 <0.9.0;
 
 contract Expenses {
-    event NewCredit(address creditor, address asset, uint amount);
-    event NewDebit(address debtor, address asset, uint amount);
+    event NewCredit(LedgerEntry ledgerEntry);
+    event NewDebit(LedgerEntry ledgerEntry);
 
     struct LedgerEntry {
         uint amount;
         address asset;
         string description;
+        address counterparty;
     }
 
     struct Ledger {
@@ -43,14 +44,14 @@ contract Expenses {
 
     function addCreditSimple(address _creditor, uint _amount, address _asset, address[] memory _debtors, string memory _description) external onlyParticipant {
         checkDebtors(_debtors);
-        LedgerEntry memory debit = LedgerEntry(_amount, _asset, _description);
-        participantLedger[_creditor].debits.push(debit);
-        emit NewCredit(_creditor, _asset, _amount);
-
         for(uint i = 0; i < _debtors.length; i++){
-            LedgerEntry memory credit = LedgerEntry(_amount/_debtors.length, _asset, _description);
+            LedgerEntry memory debit = LedgerEntry(_amount/_debtors.length, _asset, _description, _debtors[i]);
+            participantLedger[_creditor].debits.push(debit);
+            emit NewDebit(debit);
+
+            LedgerEntry memory credit = LedgerEntry(_amount/_debtors.length, _asset, _description, _creditor);
             participantLedger[_debtors[i]].credits.push(credit);
-            emit NewDebit(_debtors[i], credit.asset, credit.amount);
+            emit NewCredit(credit);
         }
     }
 

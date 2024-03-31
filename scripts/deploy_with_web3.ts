@@ -41,4 +41,6 @@ import { deploy, } from './web3-lib'
  * 0x4B20993Bc481177ec7E8f571ceCaE8A9e22C02db
  * 
  * 0x78731D3Ca6b7E34aC0F824c42a7cC18A495cabaB
+ * 
+ * USDC Sepolia (Arbitrum) - 0xf3c3351d6bd0098eeb33ca8f830faf2a141ea2e1
  */
