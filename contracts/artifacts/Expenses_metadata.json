@@ -21,12 +21,18 @@
 					},
 					{
 						"indexed": false,
+						"internalType": "address",
+						"name": "asset",
+						"type": "address"
+					},
+					{
+						"indexed": false,
 						"internalType": "uint256",
-						"name": "expenseId",
+						"name": "amount",
 						"type": "uint256"
 					}
 				],
-				"name": "NewExpense",
+				"name": "NewCredit",
 				"type": "event"
 			},
 			{
@@ -40,12 +46,18 @@
 					},
 					{
 						"indexed": false,
+						"internalType": "address",
+						"name": "asset",
+						"type": "address"
+					},
+					{
+						"indexed": false,
 						"internalType": "uint256",
-						"name": "incomeId",
+						"name": "amount",
 						"type": "uint256"
 					}
 				],
-				"name": "NewIncome",
+				"name": "NewDebit",
 				"type": "event"
 			},
 			{
@@ -69,9 +81,14 @@
 						"internalType": "address[]",
 						"name": "_debtors",
 						"type": "address[]"
+					},
+					{
+						"internalType": "string",
+						"name": "_description",
+						"type": "string"
 					}
 				],
-				"name": "addExpenseSimple",
+				"name": "addCreditSimple",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -87,167 +104,6 @@
 				"name": "addParticipant",
 				"outputs": [],
 				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "expenseIndex",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"name": "expensesByExpenseId",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "expenseId",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "amount",
-						"type": "uint256"
-					},
-					{
-						"internalType": "address",
-						"name": "token",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					},
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"name": "expensesByParticipant",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "expenseId",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "amount",
-						"type": "uint256"
-					},
-					{
-						"internalType": "address",
-						"name": "token",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "_participant",
-						"type": "address"
-					},
-					{
-						"internalType": "uint256",
-						"name": "incomeId",
-						"type": "uint256"
-					}
-				],
-				"name": "getIncome",
-				"outputs": [
-					{
-						"components": [
-							{
-								"internalType": "uint256",
-								"name": "incomeId",
-								"type": "uint256"
-							},
-							{
-								"internalType": "uint256",
-								"name": "expenseId",
-								"type": "uint256"
-							},
-							{
-								"internalType": "uint256",
-								"name": "amount",
-								"type": "uint256"
-							},
-							{
-								"internalType": "address",
-								"name": "token",
-								"type": "address"
-							}
-						],
-						"internalType": "struct Expenses.Income",
-						"name": "",
-						"type": "tuple"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					},
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"name": "incomesByParticipants",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "incomeId",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "expenseId",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "amount",
-						"type": "uint256"
-					},
-					{
-						"internalType": "address",
-						"name": "token",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -277,15 +133,10 @@
 						"type": "address"
 					}
 				],
-				"name": "listExpenses",
+				"name": "listCredits",
 				"outputs": [
 					{
 						"components": [
-							{
-								"internalType": "uint256",
-								"name": "expenseId",
-								"type": "uint256"
-							},
 							{
 								"internalType": "uint256",
 								"name": "amount",
@@ -293,11 +144,16 @@
 							},
 							{
 								"internalType": "address",
-								"name": "token",
+								"name": "asset",
 								"type": "address"
+							},
+							{
+								"internalType": "string",
+								"name": "description",
+								"type": "string"
 							}
 						],
-						"internalType": "struct Expenses.Expense[]",
+						"internalType": "struct Expenses.LedgerEntry[]",
 						"name": "",
 						"type": "tuple[]"
 					}
@@ -313,20 +169,10 @@
 						"type": "address"
 					}
 				],
-				"name": "listIncomes",
+				"name": "listDebits",
 				"outputs": [
 					{
 						"components": [
-							{
-								"internalType": "uint256",
-								"name": "incomeId",
-								"type": "uint256"
-							},
-							{
-								"internalType": "uint256",
-								"name": "expenseId",
-								"type": "uint256"
-							},
 							{
 								"internalType": "uint256",
 								"name": "amount",
@@ -334,161 +180,18 @@
 							},
 							{
 								"internalType": "address",
-								"name": "token",
+								"name": "asset",
 								"type": "address"
+							},
+							{
+								"internalType": "string",
+								"name": "description",
+								"type": "string"
 							}
 						],
-						"internalType": "struct Expenses.Income[]",
+						"internalType": "struct Expenses.LedgerEntry[]",
 						"name": "",
 						"type": "tuple[]"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "_participant",
-						"type": "address"
-					},
-					{
-						"internalType": "address",
-						"name": "_asset",
-						"type": "address"
-					}
-				],
-				"name": "listIncomes",
-				"outputs": [
-					{
-						"components": [
-							{
-								"internalType": "uint256",
-								"name": "incomeId",
-								"type": "uint256"
-							},
-							{
-								"internalType": "uint256",
-								"name": "expenseId",
-								"type": "uint256"
-							},
-							{
-								"internalType": "uint256",
-								"name": "amount",
-								"type": "uint256"
-							},
-							{
-								"internalType": "address",
-								"name": "token",
-								"type": "address"
-							}
-						],
-						"internalType": "struct Expenses.Income[]",
-						"name": "",
-						"type": "tuple[]"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					},
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"name": "participantIncomeByIncomeId",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "incomeId",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "expenseId",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "amount",
-						"type": "uint256"
-					},
-					{
-						"internalType": "address",
-						"name": "token",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					},
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					},
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"name": "participantIncomesByAsset",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "incomeId",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "expenseId",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "amount",
-						"type": "uint256"
-					},
-					{
-						"internalType": "address",
-						"name": "token",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"name": "participantIncomesIds",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
 					}
 				],
 				"stateMutability": "view",
@@ -523,11 +226,11 @@
 	},
 	"sources": {
 		"contracts/Expenses.sol": {
-			"keccak256": "0x5223af512f8e2916dcfdf852347b7cb6e626bb34ab4b9384ae571402222ffe74",
+			"keccak256": "0x6eeb59e46f92c7dd83020b365f9e46023331f4ff06160b50a8893a35f147a59c",
 			"license": "GPL-3.0",
 			"urls": [
-				"bzz-raw://ef8964689ac6b8ee5d59226c9ba7b2f6fe916fbaf7ec1343223636c168e1d8d9",
-				"dweb:/ipfs/QmZDvKthLLHBaPQ5w5zZQWqt3uFxeNMHe4uGwWzfxe2dJF"
+				"bzz-raw://1387a62c010734112c8c33406c01f25eccae57690f3b78ab1b72068c535a3091",
+				"dweb:/ipfs/QmNhv2CEeuJajpogh3hfFxsyfx1SZ572mWvWv7rwR1ZmZe"
 			]
 		}
 	},
